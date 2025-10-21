@@ -1,101 +1,139 @@
-# Using GitHub Actions for Model Training and Versioning
+# GitHub Actions and GCP Connections: Beginner Lab
 
-This repository demonstrates how to use GitHub Actions to automate the process of training a machine learning model, storing the model, and versioning it. This allows you to easily update and improve your model in a collaborative environment.
-
-Watch the tutorial video for this lab at [Github action Lab2](https://youtu.be/cj5sXIMZUjQ)
-
-
-## Prerequisites
-
-- [GitHub](https://github.com) account
-- Basic knowledge of Python and machine learning
-- Git command-line tool (optional)
-
-## Getting Started
-
-1. **Fork this Repository**: Click the "Fork" button at the top right of this [repository](https://github.com/raminmohammadi/MLOps/) to create your own copy.
-3. **Clone Your Repository**:
-   ```bash
-   git clone https://github.com/your-username/your-forked-repo.git
-   cd your-forked-repo
-
-   ```
-4. GitHub account
-5. Basic knowledge of Python and machine learning
-6. Git command-line tool (optional)
-
-# Running the Workflow
-## Customize Model Training
-1. Modify the `train_model.py` script in the `src/` directory according to your dataset and model requirements. This script generates synthetic data for demonstration purposes.
-
-## Push Your Changes:
-1. Commit your changes and push them to your forked repository.
-
-## GitHub Actions Workflow:
-1. Once you push changes to the main branch, the GitHub Actions workflow will be triggered automatically.
-
-## View Workflow Progress:
-1. You can track the progress of the workflow by going to the "Actions" tab in your GitHub repository.
-
-## Retrieve the Trained Model:
-1. After the workflow completes successfully, the trained model will be stored in the `models/` directory.
-
-# Model Evaluation
-The model evaluation is performed automatically within the GitHub Actions workflow. The evaluation results (e.g., F1 Score) are stored in the `metrics/` directory.
-
-# Versioning the Model
-Each time you run the workflow, a new version of the model is created and stored. You can access and use these models for your projects.
-
-# GitHub Actions Workflow Details
-The workflow consists of the following steps:
-
-- Generate and Store Timestamp: A timestamp is generated and stored in a file for versioning.
-- Model Training: The `train_model.py` script is executed, which trains a random forest classifier on synthetic data and stores the model in the `models/` directory.
-- Model Evaluation: The `evaluate_model.py` script is executed to evaluate the model's F1 Score on synthetic data, and the results are stored in the `metrics/` directory.
-- Store and Version the New Model: The trained model is moved to the `models/` directory with a timestamp-based version.
-- Commit and Push Changes: The metrics and updated model are committed to the repository, allowing you to track changes.
-
-# Model Calibration Workflow
 ## Overview
-The `model_calibration_on_push.yml` workflow is a part of the automation process for machine learning model calibration within this repository. It is essential for ensuring that the model's predictions are accurate and well-calibrated, a critical step in machine learning applications.
+Welcome to the "GitHub Actions and GCP Connections" beginner lab! In this lab, you will learn how to automate a machine learning workflow using GitHub Actions and Google Cloud Platform (GCP). By the end of the lab, you will understand how to connect GitHub Actions to GCP, allowing you to automate the process of training a machine learning model and uploading the results to Google Cloud Storage (GCS).
 
-## Workflow Purpose
-This workflow's primary purpose is to calibrate a trained machine learning model after each push to the main branch of the repository. Calibration is a crucial step to align model predictions with reality, particularly when dealing with classification tasks. In simple terms, calibration ensures that a model's predicted probabilities match the actual likelihood of an event happening.
+The provided project includes a simple machine learning model (RandomForestClassifier) trained on the Iris dataset. Your focus will be on setting up the cloud environment and automating the workflow using GitHub Actions.
 
-## Workflow Execution
-Let's break down how this workflow operates step by step:
+## Learning Objectives
+By completing this lab, you will:
 
-### Step 1: Trigger on Push to Main Branch
-- This workflow is automatically initiated when changes are pushed to the main branch of the repository. It ensures that the model remains calibrated and up-to-date with the latest data and adjustments.
+1. Learn how to set up a GCP project and configure a service account for automation.
+2. Understand how to grant GitHub Actions access to your GCP project.
+3. Automate the process of training and saving a model using GitHub Actions.
+4. Use Google Cloud Storage (GCS) to store your trained machine learning model.
 
-### Step 2: Prepare Environment
-- The workflow begins by setting up a Python environment and installing the necessary Python libraries and dependencies. This is crucial to ensure that the model calibration process can be executed without any issues.
+## Setup
 
-### Step 3: Load Trained Model
-- The trained machine learning model, which has been previously saved in the `models/` directory, is loaded into memory. This model should be the most recent version, as trained by the `train_model.py` script.
+### Step 1: Create a New GitHub Repository
+1. Go to GitHub and create a new repository. Name it something like `gh-actions-gcp-beginner-lab`.
+2. Don't initialize the repository with a README or .gitignore.
+3. Note the URL of your new repository.
 
-### Step 4: Calibrate Model Probabilities
-- In this step, the model's predicted probabilities are calibrated. Calibration methods, such as Platt scaling or isotonic regression, are applied. These methods adjust the model's predicted probabilities to match the actual likelihood of an event occurring. This calibration step is critical for reliable decision-making based on the model's predictions.
+### Step 2: Clone the Template Repository and Set Up Your Project
+Instead of cloning the original repository directly, we'll clone it, then push it to your new repository:
 
-### Step 5: Save Calibrated Model
-- The calibrated model is saved back to the `models/` directory. It is given a distinct identifier to differentiate it from the original, uncalibrated models. This ensures that both the original model and the calibrated model are available for comparison and use.
+```bash
+# Clone the template repository
+git clone https://github.com/AshyScripts/github-actions-gcp-beginner-lab.git
 
-### Step 6: Commit and Push Changes
-- This final step involves committing the calibrated model and any other relevant files to the repository. It is essential to keep track of the changes made during the calibration process and to store the calibrated model in the repository for future applications and reference.
+# Navigate into the new directory
+cd github-actions-gcp-beginner-lab
 
-# Customization
-The `model_calibration_on_push.yml` workflow can be customized to align with your specific project requirements. You can modify calibration methods, the directory where the calibrated model is saved, or any other aspects of the calibration process to meet your project's unique needs.
+# Remove the existing Git configuration
+rm -rf .git
 
-# Integration with Model Training
-This workflow is designed to work seamlessly with the main model training workflow, `model_retraining_on_push.yml`. In the initial workflow, the model is trained, and in this workflow, the calibrated model is generated. The calibrated model can then be used in applications where precise, well-calibrated probabilities are essential.
+# Initialize a new Git repository
+git init
 
-# License
-This project is licensed under the MIT License - see the LICENSE file for details.
+# Add all files to the new repository
+git add .
 
-# Acknowledgments
-- This project uses GitHub Actions for continuous integration and deployment.
-- Model training and evaluation are powered by Python and scikit-learn.
+# Commit the files
+git commit -m "Initial commit"
 
-# Questions or Issues
-If you have any questions or encounter issues while using this GitHub Actions workflow, please open an issue in the Issues section of your repository.
+# Set the remote to your new GitHub repository
+git remote add origin https://github.com/your-username/gh-actions-gcp-beginner-lab.git
 
+# Push the code to your new repository
+git push -u origin main
+```
+
+Replace `your-username` with your actual GitHub username in the remote URL.
+
+### Step 3: Create a Virtual Environment and Install Dependencies
+To follow along this lab, you need to install required dependencies:
+
+```bash
+python -m venv venv
+source venv/bin/activate  # For Windows, use `venv\Scripts\activate`
+pip install -r requirements.txt
+```
+
+### Step 4: Set Up Google Cloud Platform (GCP)
+1. Create a New GCP Project in Google Cloud Console. 
+2. Create a service account and give it the required roles and permissions to interact with Google Cloud Storage. Go to `IAM & Admin` section and add the `Storage Admin` role.
+3. Generate a JSON key for the service account. Save it securely.
+
+### Step 5: Create a Google Cloud Storage (GCS) Bucket
+1. Go to Google Cloud Console
+2. Navigate to the Storage section, and select Buckets
+3. Create a new bucket. Choose a unique name for your bucket.
+4. Note the bucket name for use in the `train_and_save_model.py` script and the GitHub Actions workflow.
+
+### Step 6: Upload the Service Account JSON Key to GitHub Actions Secrets
+1. Go to your GitHub repository's Settings.
+2. Navigate to Secrets and variables > Actions > New repository secret.
+3. Name the secret `GCP_SA_KEY`.
+4. Paste the entire contents of the service account JSON key file into the secret value field and click Add secret.
+
+### Step 7: Set Up GitHub Actions Workflow
+Now that you’ve added the JSON key, we can set up the GitHub Actions workflow to automate the model training and uploading process.
+
+1. In the root directory of the project, there should be a folder named `.github` and in this folder, there should be another folder (nested) named `workflows`. This is where GitHub Actions read different workflow `yaml` files. 
+
+2. For the current project, there should be a file in `.github/workflows` named `train-and-upload.yml`. If not, create a file with this name and this file should have below content:
+
+```yaml
+name: Train and save model to GCS
+
+on:
+  schedule:
+    - cron: '0 0 * * *' # Run every day at midnight
+  workflow_dispatch: # Run manually
+
+jobs:
+  train_and_save:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout the code
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+
+      - name: Get cache dir 
+        id: pip-cache-dir
+        run: echo "dir=$(pip cache dir)" >> $GITHUB_OUTPUT
+      
+      - name: Cache pip dependencies
+        uses: actions/cache@v4
+        with:
+          path: ${{ steps.pip-cache-dir.outputs.dir}}
+          key: ${{ runner.os }}-pip-${{ hashFiles('**/requirements.txt') }}
+          restore-keys: |
+            ${{ runner.os }}-pip-
+      
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+      
+      - name: Authenticate with GCP
+        uses: 'google-github-actions/auth@v2'
+        with:
+          credentials_json: '${{ secrets.GCP_SA_KEY }}'
+
+      - name: Train and save model
+        run: |
+          python train_and_save_model.py
+```
+ In this workflow we are instructing GitHub Actions to do below step by defining `train_and_save` job:
+ 
+ - Workflow is scheduled to run each day at midnight using cron expressions.
+ - Then we check out the code (`actions/checkout@v4`), and then we set up a Python environment (`actions/setup-python@v5`) with version `3.10` to run the necessary scripts.
+ - We get the directory where `pip` caches installed dependencies. 
+- Cache pip dependencies: this is a useful step which caches pip dependencies based on the `requirements.txt`. `key` parameter is set to be based on the `runner.os` and also we use `hashFiles('**/requirements.txt')` to generate a unique number based on the requiremenets. So, if in the future runs, requirements is updated, GitHub Actions will install the new dependencies. 
+- Authenticate with GCP: This step authenticates the GitHub Actions runner with Google Cloud using the service account key stored in the GitHub repository secrets as `GCP_SA_KEY`. This authentication allows the workflow to interact with Google Cloud resources, such as Google Cloud Storage (GCS).

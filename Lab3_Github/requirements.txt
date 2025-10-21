@@ -1,6 +1,3 @@
-scikit-learn
-numpy
 pandas
-pytest
-ipykernel
-mlflow
+scikit-learn
+google-cloud-storage
