@@ -58,7 +58,7 @@ jobs:
       run: |
         git config --global user.email "anu.mhegde@gmail.com"
         git config --global user.name "ananya-mh"
-        git add $GITHUB_WORKSPACE/Lab3_Github/metrics/$metrics_filename $GITHUB_WORKSPACE/Lab3_Github/models/$model_filename
+        git add $GITHUB_WORKSPACE/Lab3_Github/metrics $GITHUB_WORKSPACE/Lab3_Github/models
         git commit -m "Add metrics and updated model"
         git push
       env:
