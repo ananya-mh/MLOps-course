@@ -19,7 +19,7 @@ jobs:
         python-version: 3.9
 
     - name: Install dependencies
-      run: pip install -r requirements.txt
+      run: pip install -r ../Lab3_Github/requirements.txt
 
     - name: Generate and Store Timestamp
       run: |
