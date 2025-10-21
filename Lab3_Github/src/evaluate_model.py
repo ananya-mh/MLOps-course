@@ -41,8 +41,9 @@ if __name__=='__main__':
 
     metrics_dir = os.path.join(os.path.dirname(__file__), "../metrics/")
     os.makedirs(metrics_dir, exist_ok=True)
-        
-    with open(f'{timestamp}_metrics.json', 'w') as metrics_file:
+
+    metrics_path = os.path.join(metrics_dir, f"{timestamp}_metrics.json")
+    with open(metrics_path, 'w') as metrics_file:
         json.dump(metrics, metrics_file, indent=4)
                
     

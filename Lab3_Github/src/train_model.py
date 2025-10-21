@@ -77,6 +77,6 @@ if __name__ == '__main__':
         # After retraining the model
         model_version = f'model_{timestamp}'  # Use a timestamp as the version
         model_filename = f'{model_version}_dt_model.joblib'
-        dump(forest, model_filename)
+        dump(forest, os.path.join(models_dir, model_filename))
                     
 
