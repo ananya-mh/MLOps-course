@@ -28,11 +28,11 @@ jobs:
           python -m pip install --upgrade pip
           pip install flake8 black
 
-      - name: Run flake8
-        run: flake8 Lab3_Github --max-line-length=100
-
       - name: Auto-format code with Black
         run: black Lab3_Github
+
+      - name: Run flake8
+        run: flake8 Lab3_Github --max-line-length=100
         
   train_and_save:
     runs-on: ubuntu-latest
