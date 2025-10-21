@@ -44,15 +44,15 @@ jobs:
       run: |
         timestamp=$(cat timestamp.txt) # Use the timestamp in your training script
         python Lab3_Github/src/evaluate_model.py  --timestamp "$timestamp" # Assuming you have a script for model evaluation
-        metrics_filename="${timestamp}_metrics.json"
-        mv $metrics_filename $GITHUB_WORKSPACE/Lab3_Github/metrics/$metrics_filename
+       # metrics_filename="${timestamp}_metrics.json"
+       # mv $metrics_filename $GITHUB_WORKSPACE/Lab3_Github/metrics/$metrics_filename
       continue-on-error: false  # Continue even if evaluation fails
 
     - name: Store and Version the New Model
       run: |
         timestamp=$(cat timestamp.txt)
-        model_filename="model_${timestamp}_dt_model.joblib"
-        mv $model_filename $GITHUB_WORKSPACE/Lab3_Github/models/$model_filename
+       # model_filename="model_${timestamp}_dt_model.joblib"
+      # mv $model_filename $GITHUB_WORKSPACE/Lab3_Github/models/$model_filename
 
     - name: Commit and Push Changes
       run: |
