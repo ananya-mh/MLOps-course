@@ -13,9 +13,14 @@ if __name__=='__main__':
     
     # Access the timestamp
     timestamp = args.timestamp
+    project_root = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
+    models_dir = os.path.join(project_root, "models")
+
+    model_version = f'model_{timestamp}_dt_model'
+    model_path = os.path.join(models_dir, f'{model_version}.joblib')
+
     try:
-        model_version = f'model_{timestamp}_dt_model'  # Use a timestamp as the version
-        model = joblib.load(f'{model_version}.joblib')
+        model = joblib.load(model_path)
     except:
         raise ValueError('Failed to catching the latest model')
         
