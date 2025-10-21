@@ -2,7 +2,7 @@ name: Train and save model to GCS
 
 on:
   # Trigger the workflow when a pull request targets main
-  pull_request:
+  push:
     branches:
       - main
 
