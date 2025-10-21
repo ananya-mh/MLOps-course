@@ -64,7 +64,6 @@ if __name__ == '__main__':
         
         mlflow.log_params(params)
             
-        
         forest = RandomForestClassifier(random_state=0)
         forest.fit(X, y)
         

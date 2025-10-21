@@ -39,9 +39,8 @@ if __name__=='__main__':
     
     # Save metrics to a JSON file
 
-    if not os.path.exists('metrics/'): 
-        # then create it.
-        os.makedirs("metrics/")
+    metrics_dir = os.path.join(os.path.dirname(__file__), "../metrics/")
+    os.makedirs(metrics_dir, exist_ok=True)
         
     with open(f'{timestamp}_metrics.json', 'w') as metrics_file:
         json.dump(metrics, metrics_file, indent=4)
