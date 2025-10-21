@@ -71,9 +71,8 @@ if __name__ == '__main__':
         mlflow.log_metrics({'Accuracy': accuracy_score(y, y_predict),
                             'F1 Score': f1_score(y, y_predict)})
         
-        if not os.path.exists('models/'): 
-            # then create it.
-            os.makedirs("models/")
+        models_dir = os.path.join(os.path.dirname(__file__), "../models/")
+        os.makedirs(models_dir, exist_ok=True)
             
         # After retraining the model
         model_version = f'model_{timestamp}'  # Use a timestamp as the version
