@@ -1,74 +1,60 @@
 # Python
 __pycache__/
 *.py[cod]
-*$py.class
-*.so
-*.egg
-*.egg-info/
-dist/
-build/
-*.whl
-
-# Virtual Environments
-fastapi_lab1_env/
-mlops-course/
-venv/
-env/
-ENV/
-.venv/
-
-# Environment Variables
-.env
-.env.local
-*.env
-
-# Airflow
-Lab2_Airflow/logs/
-Lab2_Airflow/airflow.db
-Lab2_Airflow/airflow.cfg
-Lab2_Airflow/unittests.cfg
-Lab2_Airflow/webserver_config.py
-Lab2_Airflow/working_data/
-Lab2_Airflow/plugins/__pycache__/
-Lab2_Airflow/dags/__pycache__/
-*.pid
-
-# Data files (if they're large or sensitive)
-*.csv
-*.xlsx
-*.json
-# Keep specific data files if needed for demo
-!Lab2_Airflow/data/test.csv
-!Lab2_Airflow/data/file.csv
-!Lab2_Airflow/data/Mall_Customers.csv
-
-# Model files (if large)
+*.pyo
+*.pyd
 *.pkl
-*.joblib
+*.egg-info/
+*.egg
+*.log
+
+# Jupyter Notebook
+.ipynb_checkpoints/
+
+# Environment / virtualenv
+.env
+.venv
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+
+# MLflow tracking artifacts
+mlruns/
+mlartifacts/
+*.mlmodel
+
+# Model files
 *.h5
 *.pt
-*.pth
-# Keep specific model if needed
-!Lab2_Airflow/model/model.sav
+*.pkl
+*.joblib
+*.sav
 
-# IDE
+# Dataset / large files
+data/
+!data/winequality.names  # <-- keep this metadata file if needed
+
+# OS-generated files
+.DS_Store
+Thumbs.db
+
+# IDE / Editor
 .vscode/
 .idea/
 *.swp
-*.swo
-*~
-.DS_Store
 
-# Jupyter
-.ipynb_checkpoints/
-*.ipynb_checkpoints
+# Temporary files
+*.tmp
+*.bak
+*.old
 
-# Testing
-.pytest_cache/
-.coverage
-htmlcov/
-.tox/
-.hypothesis/
+# Reports (optional)
+*.pdf
 
-# Documentation
-docs/_build/
+# Weights & Biases
+wandb/
+*.wandb
+wandb-*.yaml
+
