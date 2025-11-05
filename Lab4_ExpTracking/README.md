@@ -37,6 +37,11 @@ Full integration including:
 
 ## Observations and Results
 
+![image1](screenshots/3.png)
+![image2](screenshots/4.png)
+![image3](screenshots/1.png)
+![image4](screenshots/2.png)
+
 ### Model Performance
 - **Training Accuracy**: 100% - Perfect classification on training data
 - **Test Accuracy**: 94.55% - Strong generalization to unseen data
