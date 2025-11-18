@@ -25,6 +25,9 @@ mlruns/
 mlartifacts/
 *.mlmodel
 
+#Logs 
+logs/
+
 # Model files
 *.h5
 *.pt
